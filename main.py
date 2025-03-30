@@ -18,12 +18,8 @@ def get_list_html(names: list[str]):
 
 
 def create_patron_html(names: list[str]) -> str:
-    html_output = ''
-    html_output += f'<p>There are currently {len(names)} public contributors. Thank You!</p>'
-    html_output += '\n<ul>'
-    html_output+= get_list_html(names)
-    html_output += '\n</ul>'
-    return html_output
+    return f"""<p>There are currently {len(names)} public contributors. Thank You!</p>\n<ul>{get_list_html(names)}</ul> """
+
 
 
 def show_patrons():
