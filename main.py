@@ -13,10 +13,13 @@ def get_list_html(names: list[str]):
     li = html_tag('li')
     patrons_list = [f'\n\t{li(name)}' for name in names]
     return ''.join(patrons_list)
-   
+
 
 def create_patron_html(names: list[str]) -> str:
-    return f"""<p>There are currently {len(names)} public contributors. Thank You!</p>\n<ul>{get_list_html(names)}</ul> """
+    return f"""
+        <p>There are currently {len(names)} public contributors. Thank You!</p>\
+        \n<ul>{get_list_html(names)}</ul>
+            """.strip()
 
 
 def show_patrons():
