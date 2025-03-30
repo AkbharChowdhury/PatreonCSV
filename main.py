@@ -9,14 +9,19 @@ def html_tag(tag: str):
     return wrap_text
 
 
+def get_list_html(names: list[str]):
+    patrons: str = ''
+    li = html_tag('li')
+    for name in names:
+        patrons += f'\n\t{li(name)}'
+    return patrons
+
+
 def create_patron_html(names: list[str]) -> str:
     html_output = ''
     html_output += f'<p>There are currently {len(names)} public contributors. Thank You!</p>'
     html_output += '\n<ul>'
-    li = html_tag('li')
-    for name in names:
-        html_output += f'\n\t{li(name)}'
-
+    html_output+= get_list_html(names)
     html_output += '\n</ul>'
     return html_output
 
