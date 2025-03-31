@@ -2,12 +2,7 @@ import pandas as pd
 from itertools import takewhile
 
 
-def html_tag(tag: str):
-    def wrap_text(message: str):
-        return f'<{tag}>{message}</{tag}>'
-
-    return wrap_text
-
+html_tag = lambda tag: lambda message: f'<{tag}>{message}</{tag}>'
 
 def get_list_html(names: list[str]):
     li = html_tag('li')
