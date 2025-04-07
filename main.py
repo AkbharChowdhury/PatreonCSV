@@ -1,10 +1,17 @@
 import pandas as pd
 from itertools import takewhile
 from typing import NamedTuple
+from enum import StrEnum
+
 
 class Person(NamedTuple):
     firstname: str
     lastname: str
+
+
+class Columns(StrEnum):
+    FirstName = "FirstName"
+    LastName = "LastName"
 
 html_tag = lambda tag: lambda message: f'<{tag}>{message}</{tag}>'
 no_rewards: str = 'No Reward'
@@ -30,8 +37,10 @@ def show_patrons():
     patrons_details = create_patron_html(patron_names)
     print(patrons_details)
 
+
 def pythonic_patrons():
-    df = pd.read_csv('patrons.csv', usecols=['FirstName', 'LastName'], skiprows=[1], index_col='FirstName')
+    columns = [column.value for column in Columns]
+    df = pd.read_csv('patrons.csv', usecols=[*columns], skiprows=[1], index_col=Columns.FirstName)
     filtered_patrons: pd.DataFrame = df.loc[:no_rewards][:-1]
     filtered_patrons.reset_index(drop=False, inplace=True)
     patron_names: list[str] = filtered_patrons.loc[:, ["FirstName", "LastName"]].values.tolist()
@@ -40,9 +49,10 @@ def pythonic_patrons():
     patrons_summary: str = create_patron_html(names=names)
     print(patrons_summary)
 
+
 def main():
     pythonic_patrons()
-    # show_patrons()
+    show_patrons()
 
 
 if __name__ == '__main__':
